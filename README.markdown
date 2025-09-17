@@ -27,32 +27,14 @@ Designed for aspiring cloud developers, this project leverages AWS's serverless 
 - **Basic Knowledge**: Familiarity with command line and Python.
 - **Billing Alerts**: Enable in AWS Console to monitor Free Tier usage.
 
-## Repository Structure
-```
-aws-serverless-image-recog/
-├── lambda_function.py      # Lambda function code (handles classification and captioning)
-├── README.md              # This file
-├── LICENSE                # MIT License
-├── .gitignore             # Git ignore rules
-├── requirements.txt        # Empty (boto3 included in Lambda)
-├── scripts/               # Automation scripts
-│   ├── deploy.sh         # Deploys Lambda and S3 trigger
-│   └── cleanup.sh        # Deletes resources
-├── tests/                 # Optional test scripts
-│   └── test_lambda.py    # Local test script (requires moto)
-├── docs/                  # Additional documentation
-│   └── architecture.md    # System architecture overview
-└── sample_images/         # Test images
-    ├── test1.jpg         # Sample image (e.g., dog)
-    └── test2.png         # Sample image (e.g., cat)
-```
+
 
 ## Setup and Deployment
 Follow these steps on your laptop to deploy the project.
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/aws-serverless-image-recog.git
+git clone https://github.com/Chaitanya980/aws-serverless-image-recog.git
 cd aws-serverless-image-recog
 ```
 
@@ -140,11 +122,7 @@ cd aws-serverless-image-recog
   ```
 - Delete IAM role via Console > IAM > Roles.
 
-## Troubleshooting
-- **Deployment Fails**: Check zip size (<250 MB), AWS CLI credentials, or IAM permissions.
-- **No Logs**: Ensure S3 trigger is set and bucket name is correct.
-- **Bedrock Errors**: Verify `us-east-1` region and model availability.
-- **Costs**: Monitor in AWS Console > Billing > Free Tier Usage. Costs are ~$0 for <5,000 images/month.
+
 
 ## Future Improvements
 - Store results in DynamoDB (25 GB free tier).
@@ -152,12 +130,11 @@ cd aws-serverless-image-recog
 - Add API Gateway for a REST endpoint (1M calls free).
 - Implement custom ML (e.g., ResNet50) via Lambda Layers.
 
-## License
-MIT License (see [LICENSE](LICENSE) file).
+
 
 ## Contributing
-Fork, modify, and submit pull requests. Issues and suggestions welcome!
+Fork, modify, and submit pull requests. Issues and suggestions are  welcome!
 
 ---
 
-Built by [Your Name]. A learning project for serverless, ML, and LLM on AWS.
+Built by Chaitanya C. A learning project for serverless, ML, and LLM on AWS.
