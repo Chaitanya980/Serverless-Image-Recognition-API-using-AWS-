@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# AWS CLI and local configs
+.aws/
+*.zip
+*.log
+
+# MacOS
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+
+# Sample images (optional, keep them in repo)
+# sample_images/
