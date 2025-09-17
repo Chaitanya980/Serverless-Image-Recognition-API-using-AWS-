@@ -15,3 +15,7 @@ This project uses AWS serverless services:
 4. Lambda calls Bedrock for caption using labels.
 5. Results logged to CloudWatch.
 
+Diagram/ Flow:
+[User] --> [S3 Upload] --> [Lambda] --> [Rekognition] --> [Labels]
+--> [Bedrock]    --> [Caption]
+--> [CloudWatch] --> [Logs]
