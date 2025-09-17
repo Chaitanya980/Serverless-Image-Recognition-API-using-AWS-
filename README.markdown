@@ -26,82 +26,16 @@ Designed for aspiring cloud developers, this project leverages AWS's serverless 
 - **Billing Alerts**: Enable in AWS Console > Billing > Preferences to monitor Free Tier usage.
 - **Text Editor**: Any editor (e.g., Notepad, VS Code) to save `lambda_function.py`.
 
-## Repository Structure
-```
-aws-serverless-image-recog/
-├── lambda_function.py      # Lambda function code (handles classification and captioning)
-├── README.md              # This file
-├── LICENSE                # MIT License
-├── .gitignore             # Git ignore rules
-├── requirements.txt        # Empty (boto3 included in Lambda)
-├── scripts/               # Automation scripts (optional, for CLI users)
-│   ├── deploy.sh         # Deploys Lambda and S3 trigger (CLI-based)
-│   └── cleanup.sh        # Deletes resources (CLI-based)
-├── tests/                 # Optional test scripts
-│   └── test_lambda.py    # Local test script (requires moto)
-├── docs/                  # Additional documentation
-│   └── architecture.md    # System architecture overview
-└── sample_images/         # Test images
-    ├── test1.jpg         # Sample image (e.g., dog)
-    └── test2.png         # Sample image (e.g., cat)
-```
+
 
 ## Setup and Deployment
-Follow these steps in the AWS Management Console to deploy the project. No command-line tools or local setup required.
+Follow these steps in the AWS Management Console to deploy the project. 
 
 ### 1. Prepare the Lambda Code
 1. Clone or download this repository from [github.com/Chaitanya980/aws-serverless-image-recog](https://github.com/Chaitanya980/aws-serverless-image-recog).
-2. Locate `lambda_function.py` in the repository (or copy the code below to a text editor):
-   ```python
-   import json
-   import boto3
-   import urllib.parse
+2. Locate `lambda_function.py` in the repository 
+        
 
-   s3_client = boto3.client('s3')
-   rekognition_client = boto3.client('rekognition')
-   bedrock_client = boto3.client('bedrock-runtime', region_name='us-east-1')
-
-   def lambda_handler(event, context):
-       for record in event['Records']:
-           bucket_name = record['s3']['bucket']['name']
-           key = urllib.parse.unquote_plus(record['s3']['object']['key'], encoding='utf-8')
-           print(f"Processing file: {key} from bucket: {bucket_name}")
-
-           if not key.lower().endswith(('.png', '.jpg', '.jpeg')):
-               print("Not an image file. Skipping.")
-               return {'statusCode': 200}
-
-           response = rekognition_client.detect_labels(
-               Image={'S3Object': {'Bucket': bucket_name, 'Name': key}},
-               MaxLabels=3,
-               MinConfidence=70
-           )
-           labels = [(label['Name'], label['Confidence']) for label in response['Labels']]
-           print(f"Top classifications: {labels}")
-
-           image_obj = s3_client.get_object(Bucket=bucket_name, Key=key)
-           image_bytes = image_obj['Body'].read()
-           
-           prompt = "Generate a descriptive caption for this image based on the following labels: " + str(labels) + ". Be creative and detailed."
-           body = json.dumps({
-               "anthropic_version": "bedrock-2023-05-31",
-               "max_tokens": 100,
-               "messages": [{"role": "user", "content": [{"type": "text", "text": prompt}]}]
-           })
-           model_id = 'anthropic.claude-3-haiku-20240307-v1:0'
-           response = bedrock_client.invoke_model(
-               body=body,
-               modelId=model_id,
-               accept='application/json',
-               contentType='application/json'
-           )
-           result = json.loads(response.get('body').read())
-           caption = result['content'][0]['text']
-           print(f"Caption: {caption}")
-
-       return {'statusCode': 200, 'body': json.dumps('Processing complete.')}
-   ```
-3. Save the code as `lambda_function.py` on your computer (e.g., in your Downloads folder).
 
 ### 2. Create IAM Role
 1. Log in to the AWS Management Console at [console.aws.amazon.com](https://console.aws.amazon.com).
@@ -120,7 +54,7 @@ Follow these steps in the AWS Management Console to deploy the project. No comma
 ### 3. Create S3 Bucket
 1. In the AWS Console, search for "S3" and select S3.
 2. Click "Create bucket".
-3. Enter a unique name (e.g., `image-api-bucket-chaitanya-2025`).
+3. Enter a name to the bucker (e.g., `image-api-bucket`).
 4. Select region: "US East (N. Virginia) us-east-1".
 5. Keep defaults (e.g., block public access) and click "Create bucket".
 
@@ -145,7 +79,7 @@ Follow these steps in the AWS Management Console to deploy the project. No comma
 ### 5. Configure S3 Trigger
 1. In the Lambda function’s page, scroll to "Function overview" > "Add trigger".
 2. Select "S3".
-3. Bucket: Choose your bucket (e.g., `image-api-bucket-chaitanya-2025`).
+3. Bucket: Choose your bucket (e.g., `image-api-bucke`').
 4. Event type: "All object create events".
 5. Optional: Add suffix filters (e.g., `.jpg`, `.png`, `.jpeg`) by repeating this step for each.
 6. Click "Add".
@@ -161,17 +95,8 @@ Follow these steps in the AWS Management Console to deploy the project. No comma
 7. Click the latest log stream.
 8. Expected output: e.g., `Top classifications: [('Dog', 95.0)] Caption: A happy dog running in the park.`
 
-### 7. Cleanup
-To avoid potential charges:
-1. **Lambda Function**: Lambda Console > Functions > `image_classifier` > Actions > Delete.
-2. **S3 Bucket**: S3 Console > Buckets > Your bucket > "Empty" (delete all objects) > "Delete".
-3. **IAM Role**: IAM Console > Roles > `lambda-image-role` > Delete (detach policies if prompted).
 
-## Troubleshooting
-- **Deployment Fails**: Ensure the ZIP file contains only `lambda_function.py` (no subfolders). Verify IAM role permissions.
-- **No Logs**: Check S3 trigger configuration in Lambda’s "Function overview". Ensure image is JPG/PNG/JPEG.
-- **Bedrock Errors**: Confirm us-east-1 region. Request model access in Bedrock Console if needed.
-- **Costs**: Monitor in AWS Console > Billing and Cost Management > Free Tier Usage. Costs are ~$0 for <5,000 images/month.
+
 
 ## Future Improvements
 - Store results in DynamoDB (25 GB free tier).
