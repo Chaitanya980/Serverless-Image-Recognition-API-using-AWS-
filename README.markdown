@@ -19,13 +19,6 @@ Designed for aspiring cloud developers, this project leverages AWS's serverless 
   - Bedrock: Model-dependent free inferences (e.g., Claude 3 Haiku) + $200 credits for new accounts (as of 2025).
 - **Extensibility**: Scripts for easy deployment and cleanup.
 
-## Prerequisites
-- **AWS Account**: Sign up at [aws.amazon.com/free](https://aws.amazon.com/free) (Free Tier + $200 credits for new users).
-- **AWS CLI v2**: Install from [docs.aws.amazon.com/cli](https://docs.aws.amazon.com/cli).
-- **Git**: For cloning the repo.
-- **Text Editor**: E.g., VS Code (free from [code.visualstudio.com](https://code.visualstudio.com)).
-- **Basic Knowledge**: Familiarity with command line and Python.
-- **Billing Alerts**: Enable in AWS Console to monitor Free Tier usage.
 
 
 
