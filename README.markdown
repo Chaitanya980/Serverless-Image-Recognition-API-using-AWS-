@@ -45,21 +45,20 @@ cd aws-serverless-image-recog
   - Trusted entity: AWS service > Lambda.
   - Attach policies: `AmazonS3ReadOnlyAccess`, `AmazonRekognitionFullAccess`, `AmazonBedrockFullAccess`, `CloudWatchLogsFullAccess`.
 - Name: `lambda-image-role`.
-- Note ARN (e.g., `arn:aws:iam::123456789012:role/lambda-image-role`).
+- Note ARN.
 
 ### 4. Create S3 Bucket
 - Run:
   ```bash
-  aws s3 mb s3://your-unique-bucket-name --region us-east-1
+  aws s3 mb s3://image-api-bucket --region us-east-1
   ```
-- Use a globally unique name (e.g., `image-upload-bucket-yourname-2025`).
 - Or use AWS Console > S3 > Create Bucket.
 
 ### 5. Deploy Lambda Function
 - Use the provided script:
   ```bash
   chmod +x scripts/deploy.sh
-  ./scripts/deploy.sh your-unique-bucket-name your-account-id
+  ./scripts/deploy.sh image-api-bucket your-account-id
   ```
 - This zips `lambda_function.py`, creates the Lambda function, and configures the S3 trigger.
 - Manual alternative:
@@ -92,9 +91,9 @@ cd aws-serverless-image-recog
 ### 6. Test the Project
 - Upload a test image:
   ```bash evenly
-  aws s3 cp sample_images/test1.jpg s3://your-unique-bucket-name/
+  aws s3 cp sample_images/test1.jpg s3://image-api-bucket/
   ```
-- Wait 10-30 seconds.
+- Wait 10 seconds.
 - Check logs in AWS Console > Lambda > image_classifier > Monitor > Logs, or:
   ```bash
   aws logs filter-log-events --log-group-name /aws/lambda/image_classifier --limit 100
