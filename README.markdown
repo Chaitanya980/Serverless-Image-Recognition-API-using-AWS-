@@ -19,13 +19,6 @@ Designed for aspiring cloud developers, this project leverages AWS's serverless 
   - Bedrock: Model-dependent free inferences (e.g., Claude 3 Haiku) + up to $200 credits for new accounts (as of 2025).
 - **Extensibility**: Easy setup via AWS Console for deployment and testing.
 
-## Prerequisites
-- **AWS Account**: Sign up at [aws.amazon.com/free](https://aws.amazon.com/free) (Free Tier + up to $200 credits for new users).
-- **AWS Console Access**: Log in to [console.aws.amazon.com](https://console.aws.amazon.com).
-- **Basic Knowledge**: Familiarity with the AWS Management Console and basic AWS services.
-- **Billing Alerts**: Enable in AWS Console > Billing > Preferences to monitor Free Tier usage.
-- **Text Editor**: Any editor (e.g., Notepad, VS Code) to save `lambda_function.py`.
-
 
 
 ## Setup and Deployment
