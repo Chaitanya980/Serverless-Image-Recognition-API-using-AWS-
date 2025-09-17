@@ -2,7 +2,6 @@ import json
 import boto3
 import urllib.parse
 
-# AWS clients (initialized once for efficiency)
 s3_client = boto3.client('s3')
 rekognition_client = boto3.client('rekognition')
 bedrock_client = boto3.client('bedrock-runtime', region_name='us-east-1')
