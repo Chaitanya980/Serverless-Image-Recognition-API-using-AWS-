@@ -42,7 +42,7 @@ Follow these steps in the AWS Management Console to deploy the project.
    - `CloudWatchLogsFullAccess`
 6. Click "Next".
 7. Name the role `lambda-image-role` and click "Create role".
-8. Note the ARN from the role’s summary page (e.g., `arn:aws:iam::YOUR-ACCOUNT-ID:role/lambda-image-role`).
+8. Note the ARN from the role’s summary page (e.g., `arn:aws:iam::YOURACCOUNTID:role/lambda-image-role`).
 
 ### 3. Create S3 Bucket
 1. In the AWS Console, search for "S3" and select S3.
@@ -64,7 +64,7 @@ Follow these steps in the AWS Management Console to deploy the project.
    - On your computer, create a ZIP file containing only `lambda_function.py` (no folders). In Windows, right-click the file > Send to > Compressed (zipped) folder. On macOS/Linux, use `zip function.zip lambda_function.py`.
    - Upload the ZIP file.
 9. In the "Configuration" tab > "General configuration" > "Edit":
-   - Timeout: 30 seconds.
+   - Timeout: 20-30 seconds.
    - Memory: 1024 MB.
    - Save changes.
 10. Click "Deploy".
@@ -86,7 +86,7 @@ Follow these steps in the AWS Management Console to deploy the project.
 5. Wait 10-30 seconds.
 6. In the Lambda Console > `image_classifier` > "Monitor" tab > "Logs" > "View logs in CloudWatch".
 7. Click the latest log stream.
-8. Expected output: e.g., `Top classifications: [('Dog', 95.0)] Caption: A happy dog running in the park.`
+
 
 
 
